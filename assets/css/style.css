@@ -24,7 +24,7 @@ img {
 }
 
 .card_body>.description {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 22px;
 }
@@ -38,4 +38,22 @@ img {
 .card_engagement>.likers {
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+@media screen and (min-width: 576px) {
+    .cols {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .cols {
+        width: 65%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .cols {
+        width: 55%;
+    }
 }
