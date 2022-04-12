@@ -68,12 +68,12 @@ function generatePost(arrayPost, domElement) {
 
     arrayPost.forEach(element => {
         const postElementWithPhoto = `
-    <div class="cols p-4 ">
-        <div class="card p-3 ">
-            <div class="card_user d-flex align-items-center mt-2 ">
-                <img class="rounded-circle" src="${element.foto}" alt="img_user ">
-                <div class="user ms-3 ">
-                    <div class="name fw-bold ">${element.autore}</div>
+    <div class="cols p-4">
+        <div class="card p-3">
+            <div class="card_user d-flex align-items-center mt-2">
+                <img class="rounded-circle" src="${element.foto}" alt="img_user">
+                <div class="user ms-3">
+                    <div class="name fw-bold">${element.autore}</div>
                     <!-- /.name -->
                     <div class="date ">
                         ${element.data}
@@ -83,25 +83,25 @@ function generatePost(arrayPost, domElement) {
             </div>
             <!-- /.card_user -->
     
-            <div class="card_body my-4 ">
-                <div class="description mb-3 ">
+            <div class="card_body my-4">
+                <div class="description mb-3">
                     ${element.testo}
                 </div>
                 <!-- /.description -->
                 <div class="img ">
-                    <img src="${element.img_post}" alt=" ">
+                    <img src="${element.img_post}" alt="foto post">
                 </div>
             </div>
             <!-- /.card_body -->
     
-            <div class="card_engagement d-flex justify-content-around mb-4 ">
-                <div class="like ">
-                    <i class="fa-solid fa-thumbs-up "></i>
+            <div class="card_engagement d-flex justify-content-around mb-4">
+                <button class="like">
+                    <i class="fa-solid fa-thumbs-up"></i>
                     <span>Mi Piace</span>
-                </div>
+                </button>
                 <!-- /.like -->
-                <div class="likers ">
-                    Piace a <span><strong>80</strong></span> persone
+                <div class="likers">
+                    Piace a <span><strong>${getRandomInteger()}</strong></span> persone
                 </div>
                 <!-- /.likers -->
             </div>
@@ -110,16 +110,16 @@ function generatePost(arrayPost, domElement) {
         <!-- /.card-->
     </div>
     <!-- /.cols -->
-    `
+`
         const postElementWithoutPhoto = `
-    <div class="cols p-4 ">
-        <div class="card p-3 ">
-            <div class="card_user d-flex align-items-center mt-2 ">
-                <img class="rounded-circle" src="${element.foto}" alt="img_user ">
-                <div class="user ms-3 ">
+    <div class="cols p-4">
+        <div class="card p-3">
+            <div class="card_user d-flex align-items-center mt-2">
+                <img class="rounded-circle" src="${element.foto}" alt="img_user">
+                <div class="user ms-3">
                     <div class="name fw-bold ">${element.autore}</div>
                     <!-- /.name -->
-                    <div class="date ">
+                    <div class="date">
                         ${element.data}
                     </div>
                 </div>
@@ -127,22 +127,22 @@ function generatePost(arrayPost, domElement) {
             </div>
             <!-- /.card_user -->
     
-            <div class="card_body my-4 ">
-                <div class="description mb-3 ">
+            <div class="card_body my-4">
+                <div class="description mb-3">
                     ${element.testo}
                 </div>
                 <!-- /.description -->
             </div>
             <!-- /.card_body -->
     
-            <div class="card_engagement d-flex justify-content-around mb-4 ">
-                <div class="like ">
-                    <i class="fa-solid fa-thumbs-up "></i>
+            <div class="card_engagement d-flex justify-content-around mb-4">
+                <button class="like">
+                    <i class="fa-solid fa-thumbs-up"></i>
                     <span>Mi Piace</span>
-                </div>
+                </button>
                 <!-- /.like -->
-                <div class="likers ">
-                    Piace a <span><strong>80</strong></span> persone
+                <div class="likers">
+                    Piace a <span><strong>${getRandomInteger()}</strong></span> persone
                 </div>
                 <!-- /.likers -->
             </div>
@@ -151,8 +151,7 @@ function generatePost(arrayPost, domElement) {
         <!-- /.card-->
     </div>
     <!-- /.cols -->
-    
-    `
+ `
 
         if (element.img_post == "") {
             domElement.insertAdjacentHTML("beforeend", postElementWithoutPhoto)
@@ -165,3 +164,15 @@ function generatePost(arrayPost, domElement) {
 }
 
 generatePost(post, rowElement)
+
+// creo la funzione per generare i numeri random dei like
+function getRandomInteger() {
+    return Math.floor(Math.random() * (1480 - 1 + 1)) + 1;
+}
+
+/* Milestone 3
+    Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+ */
+
+// seleziono l'elemento della dom che corrisponde al button "mi piace"
+const likeButtonElement = document.querySelectorAll("button")
