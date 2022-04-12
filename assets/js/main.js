@@ -16,7 +16,7 @@ const post = [{
         foto: "https://picsum.photos/50/50",
         data: "12/06/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: "https://picsum.photos/1280/500"
+        img_post: "https://picsum.photos/1280/600"
     },
     {
         id: 2,
@@ -32,7 +32,7 @@ const post = [{
         foto: "https://picsum.photos/50/50",
         data: "12/06/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: "https://picsum.photos/1280/500"
+        img_post: "https://picsum.photos/1380/680"
     },
     {
         id: 4,
@@ -41,6 +41,14 @@ const post = [{
         data: "12/06/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: ""
+    },
+    {
+        id: 5,
+        autore: "Matteo Sperlari",
+        foto: "https://picsum.photos/50/50",
+        data: "12/06/2021",
+        testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
+        img_post: "https://picsum.photos/1480/780"
     }
 ]
 

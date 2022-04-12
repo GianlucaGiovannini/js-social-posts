@@ -13,6 +13,12 @@ img {
     height: auto;
 }
 
+.card {
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+}
+
 .name,
 .date {
     line-height: 15px;
