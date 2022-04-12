@@ -36,7 +36,7 @@ const post = [{
     },
     {
         id: 4,
-        autore: "Gianluca Giovannini",
+        autore: "Matteo Sperlari",
         foto: "https://picsum.photos/100/100",
         data: "12/06/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
@@ -44,7 +44,7 @@ const post = [{
     },
     {
         id: 5,
-        autore: "Matteo Sperlari",
+        autore: "Gianluca Giovannini",
         foto: "https://picsum.photos/110/110",
         data: "12/06/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
@@ -64,9 +64,15 @@ const rowElement = document.querySelector(".row")
 // credo l'elemento che andrà inseritoi nel nodo della dom
 
 // creo una funzione che mi cicla gli oggetti dell'array e me li stampa a schermo
+/**
+ * ## Generatore di post
+ * @param {array} arrayPost array contentente i dati del post
+ * @param {node} domElement elemento della dom al quale si vuole appendere il post
+ */
 function generatePost(arrayPost, domElement) {
 
     arrayPost.forEach(element => {
+        // constante con elemento da inserire nell'html con foto
         const postElementWithPhoto = `
     <div class="cols p-4">
         <div class="card p-3">
@@ -114,6 +120,7 @@ function generatePost(arrayPost, domElement) {
     </div>
     <!-- /.cols -->
 `
+            // constante con elemento da inserire nell'html senza foto
         const postElementWithoutPhoto = `
     <div class="cols p-4">
         <div class="card p-3">
@@ -158,20 +165,16 @@ function generatePost(arrayPost, domElement) {
     </div>
     <!-- /.cols -->
  `
-
+            // condizione per capire l'oggetto nell'array ha una foto oppure no e quindi decidere quale elemento inserire nell'html
         if (element.img_post == "") {
             domElement.insertAdjacentHTML("beforeend", postElementWithoutPhoto)
 
         } else {
             domElement.insertAdjacentHTML("beforeend", postElementWithPhoto)
         }
-
     });
-
-
-
 }
-
+// invoco la funzione che genera i post
 generatePost(post, rowElement)
 
 // creo la funzione per generare i numeri random dei like
@@ -183,26 +186,35 @@ function getRandomInteger() {
     Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
+// ciclo gli oggetti dell'array per prendere il singolo oggetto 
 for (let i = 0; i < post.length; i++) {
     const postSingolo = post[i];
     //console.log(postSingolo.id)
 
-    let buttonElement = document.getElementById(postSingolo.id)
-        //console.log(buttonElement)
-    let classLike = ".num_" + postSingolo.id
-        //console.log(classLike)
-    let spanElement = document.querySelector(classLike)
-        //console.log(spanElement)
+    // seleziono il bottone a cui applichero l'addEventListener
+    let buttonElement = document.getElementById(postSingolo.id);
+    //console.log(buttonElement)
 
+    // creo una costante per poter selezionare lo span con i like ( devo fare questa cosa perché altrimenti non posso selezionare un numero tramite queryselector)
+    let classLike = ".num_" + postSingolo.id;
+    //console.log(classLike)
+
+    // seleziono lo span a cui cambiero il numero di like
+    let spanElement = document.querySelector(classLike);
+    //console.log(spanElement)
+
+    // Creo l'evento al click per il bottone 
     buttonElement.addEventListener("click", () => {
+        // aggiungo e tolgo la classe che colora il bottone
         buttonElement.classList.toggle("active")
 
-
+        // aggiungo e tolgo la classe che i like nello span
         spanElement.classList.toggle("active")
 
+        // salvo in una costante il numero che contiene lo span con i like
         const spanInnerHTML = Number(spanElement.innerHTML);
 
-
+        // credo una condizione per verificare se lo span ha o meno determinate classe per far rimuovere o aggiungere +1/-1 all'attuale numero di like che ha
         if (spanElement.classList == "num_" + postSingolo.id + " active") {
             spanElement.innerHTML = Number(spanInnerHTML) + 1;
         } else {
