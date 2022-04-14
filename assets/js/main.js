@@ -9,44 +9,66 @@
     numero di likes.
     Non è necessario creare date casuali 
 */
+/*  BONUS DATA INVERTITA */
+
+/**
+ * ## Convertitore Date
+ * @param {string} datastring il valore (stringa) di una data es (12/12/1920)
+ * @returns {string} data invertita
+ */
+function convertitoreData(datastring) {
+    const mesi = ["Gennario", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre", ]
+    let data = new Date(datastring);
+    return `${data.getDate()}/${mesi[data.getMonth()]}/${data.getFullYear()}`;
+}
 
 const post = [{
         id: 1,
-        autore: "Phill Mangione",
+        autoreNome: "Phill",
+        autoreCognome: "Mangione",
+        gender: "uomo",
         foto: "https://picsum.photos/50/50",
-        data: "12/06/2021",
+        data: "02/25/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: "https://picsum.photos/1280/600"
     },
     {
         id: 2,
-        autore: "Sofia Perlari",
+        autoreNome: "Sofia",
+        autoreCognome: "Perlari",
+        gender: "donna",
         foto: "https://picsum.photos/80/80",
-        data: "12/06/2021",
+        data: "04/13/2022",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: ""
     },
     {
         id: 3,
-        autore: "Ambra Cusin",
-        foto: "https://picsum.photos/90/90",
-        data: "12/06/2021",
+        autoreNome: "Ambra",
+        autoreCognome: "Cusin",
+        gender: "donna",
+        foto: "",
+        data: "06/12/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: "https://picsum.photos/1380/680"
     },
     {
         id: 4,
-        autore: "Matteo Sperlari",
+        autoreNome: "Matteo",
+        autoreCognome: "Sperlari",
+        gender: "uomo",
         foto: "https://picsum.photos/100/100",
-        data: "12/06/2021",
+        data: "06/12/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: ""
     },
     {
         id: 5,
-        autore: "Gianluca Giovannini",
+        autoreNome: "Gianluca",
+        autoreCognome: "Giovannini",
+        gender: "uomo",
         foto: "https://picsum.photos/110/110",
-        data: "12/06/2021",
+        data: "06/12/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: "https://picsum.photos/1480/780"
     }
@@ -72,17 +94,23 @@ const rowElement = document.querySelector(".row")
 function generatePost(arrayPost, domElement) {
 
     arrayPost.forEach(element => {
+
+        element.data = convertitoreData(element.data)
+
+        // creo le iniziali di ogni singolo autore del post per metterle se serve come immagine nei post senza immagine
+        const iniziali = element.autoreNome.charAt(0).toUpperCase() + element.autoreCognome.charAt(0).toUpperCase()
+
         // constante con elemento da inserire nell'html con foto
         const postElementWithPhoto = `
     <div class="cols p-4">
         <div class="card p-3">
             <div class="card_user d-flex align-items-center mt-2">
-                <div class="img_user">
+                <div id="img_user${element.id}" class="img_user">
                     <img class="rounded-circle" src="${element.foto}"   alt="img_user">
                 </div>
                 <!-- /.img_user -->
                 <div class="user ms-3">
-                    <div class="name fw-bold">${element.autore}</div>
+                    <div class="name fw-bold">${element.autoreNome} ${element.autoreCognome}</div>
                     <!-- /.name -->
                     <div class="date ">
                         ${element.data}
@@ -119,18 +147,18 @@ function generatePost(arrayPost, domElement) {
         <!-- /.card-->
     </div>
     <!-- /.cols -->
-`
-            // constante con elemento da inserire nell'html senza foto
+`;
+        // constante con elemento da inserire nell'html senza foto
         const postElementWithoutPhoto = `
     <div class="cols p-4">
         <div class="card p-3">
             <div class="card_user d-flex align-items-center mt-2">
-                <div class="img_user">
-                    <img class="rounded-circle" src="${element.foto}"   alt="img_user">
+                <div id="img_user${element.id}" class="img_user">
+                    <img class="rounded-circle" src="${element.foto}" alt="img_user">
                 </div>
                 <!-- /.img_user -->
                 <div class="user ms-3">
-                    <div class="name fw-bold ">${element.autore}</div>
+                    <div class="name fw-bold ">${element.autoreNome} ${element.autoreCognome}</div>
                     <!-- /.name -->
                     <div class="date">
                         ${element.data}
@@ -164,13 +192,34 @@ function generatePost(arrayPost, domElement) {
         <!-- /.card-->
     </div>
     <!-- /.cols -->
- `
-            // condizione per capire l'oggetto nell'array ha una foto oppure no e quindi decidere quale elemento inserire nell'html
+ `;
+        // condizione per capire l'oggetto nell'array ha una foto oppure no e quindi decidere quale elemento inserire nell'html
         if (element.img_post == "") {
             domElement.insertAdjacentHTML("beforeend", postElementWithoutPhoto)
 
         } else {
             domElement.insertAdjacentHTML("beforeend", postElementWithPhoto)
+        }
+
+        /* BONUS INIZIALI AL POSTO DELL'IMMAGINE PROFILO */
+
+        // prendo tramite id il l'elemento della dom che modificherò se non ha un'immagine profilo
+        const imgProfiloElement = document.getElementById("img_user" + element.id)
+
+        if (element.foto == "") {
+            //seleziono l'elemento
+            const imgProfiloElement = document.getElementById("img_user" + element.id)
+
+
+            imgProfiloElement.outerHTML = `<div id="img_user${element.id}" class="iniziali d-flex align-items-center justify-content-center rounded-circle">${iniziali}</div>`
+
+            if (element.gender == "uomo") {
+                const imgProfiloElement = document.getElementById("img_user" + element.id)
+                imgProfiloElement.classList.add("bg_uomo")
+            } else {
+                const imgProfiloElement = document.getElementById("img_user" + element.id)
+                imgProfiloElement.classList.add("bg_donna")
+            }
         }
     });
 }
@@ -208,14 +257,11 @@ for (let i = 0; i < post.length; i++) {
         // aggiungo e tolgo la classe che colora il bottone
         buttonElement.classList.toggle("active")
 
-        // aggiungo e tolgo la classe che i like nello span
-        spanElement.classList.toggle("active")
-
         // salvo in una costante il numero che contiene lo span con i like
         const spanInnerHTML = Number(spanElement.innerHTML);
 
         // credo una condizione per verificare se lo span ha o meno determinate classe per far rimuovere o aggiungere +1/-1 all'attuale numero di like che ha
-        if (spanElement.classList == "num_" + postSingolo.id + " active") {
+        if (buttonElement.classList == "num_" + postSingolo.id + " active") {
             spanElement.innerHTML = Number(spanInnerHTML) + 1;
         } else {
             spanElement.innerHTML = Number(spanInnerHTML) - 1;
