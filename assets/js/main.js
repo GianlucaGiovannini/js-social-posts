@@ -30,7 +30,8 @@ const post = [{
         foto: "https://picsum.photos/50/50",
         data: "02/25/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: "https://picsum.photos/1280/600"
+        img_post: "https://picsum.photos/1280/600",
+        like: ""
     },
     {
         id: 2,
@@ -40,7 +41,8 @@ const post = [{
         foto: "https://picsum.photos/80/80",
         data: "04/13/2022",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: ""
+        img_post: "",
+        like: ""
     },
     {
         id: 3,
@@ -50,7 +52,8 @@ const post = [{
         foto: "",
         data: "06/12/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: "https://picsum.photos/1380/680"
+        img_post: "https://picsum.photos/1380/680",
+        like: ""
     },
     {
         id: 4,
@@ -60,7 +63,8 @@ const post = [{
         foto: "https://picsum.photos/100/100",
         data: "06/12/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: ""
+        img_post: "",
+        like: ""
     },
     {
         id: 5,
@@ -70,7 +74,8 @@ const post = [{
         foto: "https://picsum.photos/110/110",
         data: "06/12/2021",
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
-        img_post: "https://picsum.photos/1480/780"
+        img_post: "https://picsum.photos/1480/780",
+        like: ""
     }
 ]
 
@@ -250,7 +255,7 @@ for (let i = 0; i < post.length; i++) {
 
     // seleziono lo span a cui cambiero il numero di like
     let spanElement = document.querySelector(classLike);
-    //console.log(spanElement)
+    // console.log(spanElement)
 
     // Creo l'evento al click per il bottone 
     buttonElement.addEventListener("click", () => {
@@ -261,10 +266,14 @@ for (let i = 0; i < post.length; i++) {
         const spanInnerHTML = Number(spanElement.innerHTML);
 
         // credo una condizione per verificare se lo span ha o meno determinate classe per far rimuovere o aggiungere +1/-1 all'attuale numero di like che ha
-        if (buttonElement.classList == "num_" + postSingolo.id + " active") {
+        if (buttonElement.classList == "like" + " active") {
             spanElement.innerHTML = Number(spanInnerHTML) + 1;
+            postSingolo.like = spanElement.innerHTML
+            console.log(`il post con id:${postSingolo.id} ha ${postSingolo.like} like`)
         } else {
             spanElement.innerHTML = Number(spanInnerHTML) - 1;
+            postSingolo.like = spanElement.innerHTML
+            console.log(`il post con id:${postSingolo.id} ha ${postSingolo.like} like`)
         }
     })
 
