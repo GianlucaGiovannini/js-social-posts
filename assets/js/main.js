@@ -256,6 +256,8 @@ for (let i = 0; i < post.length; i++) {
     // seleziono lo span a cui cambiero il numero di like
     let spanElement = document.querySelector(classLike);
     // console.log(spanElement)
+    // assegno ad ogni oggetto dell'array post i like che ha nel post
+    postSingolo.like = spanElement.innerHTML
 
     // Creo l'evento al click per il bottone 
     buttonElement.addEventListener("click", () => {
