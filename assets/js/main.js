@@ -76,6 +76,17 @@ const post = [{
         testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
         img_post: "https://picsum.photos/1480/780",
         like: ""
+    },
+    {
+        id: 6,
+        autoreNome: "Matteo",
+        autoreCognome: "Giannetti",
+        gender: "uomo",
+        foto: "",
+        data: "06/12/2021",
+        testo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui cum, nisi incidunt excepturi non officiis fuga. Molestiae, necessitatibus.",
+        img_post: "https://picsum.photos/1580/880",
+        like: ""
     }
 ]
 
@@ -228,6 +239,8 @@ function generatePost(arrayPost, domElement) {
         }
     });
 }
+
+
 // invoco la funzione che genera i post
 generatePost(post, rowElement)
 
